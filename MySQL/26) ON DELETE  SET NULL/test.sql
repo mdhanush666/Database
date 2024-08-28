@@ -1,0 +1,20 @@
+USE new_mydb;
+
+SET AUTOCOMMIT = OFF;
+
+SELECT * FROM customers;
+SELECT * FROM payments;
+COMMIT;
+ROLLBACK;
+
+ALTER TABLE payments DROP FOREIGN KEY fk_payment_cusID;
+
+ALTER TABLE payments ADD CONSTRAINT 
+fk_payment_cusID FOREIGN KEY (cusID) REFERENCES customers(cusID)
+ON DELETE SET NULL;
+
+ALTER TABLE payments ADD CONSTRAINT 
+fk_payment_cusID FOREIGN KEY (cusID) REFERENCES customers(cusID)
+ON DELETE CASCADE;
+
+DELETE FROM customers WHERE cusID  = 1;
